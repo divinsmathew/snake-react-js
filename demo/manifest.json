@@ -1,6 +1,6 @@
 {
   "short_name": "Snake!",
-  "name": "Snake, not the christian kind!",
+  "name": "A simple, classic snake game.",
   "icons": [
     {
       "src": "favicon.ico",
