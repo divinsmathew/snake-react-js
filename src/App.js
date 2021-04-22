@@ -28,10 +28,10 @@ class App extends Component {
         this.allowSwipe = true;
 
         this.eatAudio = new Audio(
-            "https://drive.google.com/uc?export=download&id=1NdXfpUa7qaGQwC1UjO7gshgBb5_78oZq"
+            "https://github.com/diozz/snake-react-js/raw/main/src/sounds/eat.mp3"
         );
         this.gameOverAudio = new Audio(
-            "https://drive.google.com/uc?export=download&id=1eRdNu3Q3XZ6VGaveLiPHMjpSQxp1i_vu"
+            "https://github.com/diozz/snake-react-js/raw/main/src/sounds/game-over.mp3"
         );
 
         let snake = new Snake();
