@@ -14,5 +14,5 @@ This is yet another implimentation of the classic snake game in ReactJs.
 # Demo 🚀
 
 Checkout a live demo [here](https://diozz.github.io/snake-react-js/demo).
-![](https://i.imgur.com/woK1HQJ.gif)
 
+![](https://i.imgur.com/woK1HQJ.gif)
