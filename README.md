@@ -1,9 +1,16 @@
-# Overview
+## Overview 🐍
 
-A simple and fun snake game written using React Js.
+This is yet another implimentation of the classic snake game in ReactJs.
 
-## Demo
+* 3 Levels of difficulties
+* Mobile responsive
 
-In the project directory, you can run:
+ Feel free to clone and improve the project. Bug reports, ideas and pull requests are super welcome!
 
-Checkout a demo of this project [here](https://diozz.github.io/snake-react-js/demo).
+## Demo 🚀
+
+Checkout a live demo [here](https://diozz.github.io/snake-react-js/demo).
+
+## Lisence 🚀
+
+Do whatever the hell you wanna do with it.
