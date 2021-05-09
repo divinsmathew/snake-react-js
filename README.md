@@ -1,4 +1,4 @@
-## Overview 🐍
+# Overview 🐍
 
 This is yet another implimentation of the classic snake game in ReactJs.
 
@@ -7,14 +7,12 @@ This is yet another implimentation of the classic snake game in ReactJs.
 
  Feel free to clone and improve the project. Bug reports, ideas and pull requests are super welcome!
 
-## Dependency 🚀
+# Dependency 📖
 
 * [react-easy-swipe](https://www.npmjs.com/package/react-easy-swipe) for touch geture detection in mobile breakpoints.
 
-## Demo 🚀
+# Demo 🚀
 
 Checkout a live demo [here](https://diozz.github.io/snake-react-js/demo).
+![](https://i.imgur.com/woK1HQJ.gif)
 
-## Lisence
-
-Do whatever the hell you wanna do with it.
