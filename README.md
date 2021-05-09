@@ -11,6 +11,6 @@ This is yet another implimentation of the classic snake game in ReactJs.
 
 Checkout a live demo [here](https://diozz.github.io/snake-react-js/demo).
 
-## Lisence 🚀
+## Lisence
 
 Do whatever the hell you wanna do with it.
