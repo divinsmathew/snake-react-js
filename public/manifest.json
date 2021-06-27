@@ -1,0 +1,15 @@
+{
+  "short_name": "Snake",
+  "name": "Simple Snake Game, written using ReactJS",
+  "icons": [
+    {
+      "src": "snake.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
