@@ -10,8 +10,10 @@ import React, { Component } from "react";
 import "./App.css";
 import "./utils.css";
 
-class App extends Component {
-    constructor() {
+class App extends Component
+{
+    constructor()
+    {
         super();
 
         this.foodClasses = [
@@ -26,6 +28,7 @@ class App extends Component {
         this.boardHeight = 15;
         this.snakeDelay = 100;
         this.allowSwipe = true;
+        this.mode = 'easy'
 
         this.eatAudio = new Audio(
             "https://github.com/diozz/snake-react-js/raw/main/src/sounds/eat.mp3"
@@ -42,7 +45,7 @@ class App extends Component {
 
         this.state = {
             currentScore: 0,
-            bestScore: 0,
+            bestScore: '--',
             gameOverMsg: "",
             snake: snake,
             foodCoordinate: [8, 18],
@@ -61,30 +64,31 @@ class App extends Component {
         this.endGame = this.endGame.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount()
+    {
         this.eatAudio.load();
         this.gameOverAudio.load();
-
-        let bestScore = localStorage.getItem("bestScore");
-        bestScore = bestScore === null ? 0 : parseInt(bestScore);
-        this.setState({ bestScore: bestScore === null ? 0 : bestScore });
 
         document.addEventListener("keydown", this.keyListner, false);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount()
+    {
         document.removeEventListener("keydown", this.keyListner, false);
     }
 
-    keyListner(event) {
+    keyListner(event)
+    {
+        if (this.state.gameMenuDisplay || this.state.gameOverDisplay) return;
+
         let keyCode = event.keyCode;
         let tempSnake = this.state.snake;
 
         let turningPoint = new TurningPoint(null, null);
 
-        switch (keyCode) {
+        switch (keyCode)
+        {
             case 38:
-                console.log("Top");
                 if (
                     tempSnake.head.direction === "T" ||
                     tempSnake.head.direction === "B"
@@ -99,7 +103,6 @@ class App extends Component {
                 break;
 
             case 39:
-                console.log("Right");
                 if (
                     tempSnake.head.direction === "R" ||
                     tempSnake.head.direction === "L"
@@ -114,7 +117,6 @@ class App extends Component {
                 break;
 
             case 40:
-                console.log("Bottom");
                 if (
                     tempSnake.head.direction === "B" ||
                     tempSnake.head.direction === "T"
@@ -129,7 +131,6 @@ class App extends Component {
                 break;
 
             case 37:
-                console.log("Left");
                 if (
                     tempSnake.head.direction === "L" ||
                     tempSnake.head.direction === "R"
@@ -148,9 +149,17 @@ class App extends Component {
         }
     }
 
-    startGame(snakeDelay) {
+    startGame(snakeDelay)
+    {
+        switch (snakeDelay)
+        {
+            case 75: this.mode = 'hard'; break;
+            case 120: this.mode = 'medium'; break;
+            case 200: this.mode = 'easy'; break;
+        }
+
         this.snakeDelay = snakeDelay;
-        this.setState({ gameMenuDisplay: false, gameOverDisplay: false });
+        this.setState({ gameMenuDisplay: false, gameOverDisplay: false, bestScore: this.getBestScore(this.mode) });
 
         this.intervalId = window.setInterval(
             this.updateSnakeState,
@@ -158,7 +167,8 @@ class App extends Component {
         );
     }
 
-    endGame() {
+    endGame()
+    {
         let snake = new Snake();
 
         snake.add(new Body([1, 3], "R"));
@@ -168,6 +178,7 @@ class App extends Component {
         this.setState({
             currentScore: 0,
             snake: snake,
+            bestScore: '--',
             foodCoordinate: [8, 18],
             foodClass: this.foodClasses[
                 this.getRandomInt(0, this.foodClasses.length - 1)
@@ -177,40 +188,47 @@ class App extends Component {
         });
     }
 
-    updateSnakeState() {
+    updateSnakeState()
+    {
         let tempSnake = this.state.snake;
         let currentBodyPiece = tempSnake.head;
 
-        if (tempSnake.isOn(currentBodyPiece.coordinates, true)) {
+        if (tempSnake.isOn(currentBodyPiece.coordinates, true))
+        {
             this.gameOver();
             return;
         }
 
         //gameOverDetection
-        switch (currentBodyPiece.direction) {
+        switch (currentBodyPiece.direction)
+        {
             case "T":
-                if (currentBodyPiece.coordinates[0] < 0) {
+                if (currentBodyPiece.coordinates[0] < 0)
+                {
                     this.gameOver();
                     return;
                 }
                 break;
 
             case "R":
-                if (currentBodyPiece.coordinates[1] > this.boardWidth - 1) {
+                if (currentBodyPiece.coordinates[1] > this.boardWidth - 1)
+                {
                     this.gameOver();
                     return;
                 }
                 break;
 
             case "B":
-                if (currentBodyPiece.coordinates[0] > this.boardHeight - 1) {
+                if (currentBodyPiece.coordinates[0] > this.boardHeight - 1)
+                {
                     this.gameOver();
                     return;
                 }
                 break;
 
             case "L":
-                if (currentBodyPiece.coordinates[1] < 0) {
+                if (currentBodyPiece.coordinates[1] < 0)
+                {
                     this.gameOver();
                     return;
                 }
@@ -221,14 +239,16 @@ class App extends Component {
         }
 
         //updateSnakePosition
-        while (currentBodyPiece) {
+        while (currentBodyPiece)
+        {
             if (
                 this.turningPoints.some(
                     (x) =>
                         x.coordinates[0] === currentBodyPiece.coordinates[0] &&
                         x.coordinates[1] === currentBodyPiece.coordinates[1]
                 )
-            ) {
+            )
+            {
                 currentBodyPiece.direction = this.turningPoints.filter(
                     (x) =>
                         x.coordinates[0] === currentBodyPiece.coordinates[0] &&
@@ -238,7 +258,8 @@ class App extends Component {
                 if (currentBodyPiece.tail) this.turningPoints.shift();
             }
 
-            switch (currentBodyPiece.direction) {
+            switch (currentBodyPiece.direction)
+            {
                 case "T":
                     currentBodyPiece.coordinates[0]--;
                     break;
@@ -266,12 +287,14 @@ class App extends Component {
         if (
             tempSnake.head.coordinates[0] === this.state.foodCoordinate[0] &&
             tempSnake.head.coordinates[1] === this.state.foodCoordinate[1]
-        ) {
+        )
+        {
             let newScore = this.state.currentScore + 5;
             let newFoodX = 0;
             let newFoodY = 0;
 
-            while (true) {
+            while (true)
+            {
                 newFoodY = this.getRandomInt(0, this.boardHeight - 1);
                 newFoodX = this.getRandomInt(0, this.boardWidth - 1);
 
@@ -297,23 +320,23 @@ class App extends Component {
                     this.getRandomInt(0, this.foodClasses.length - 1)
                 ],
             });
-        } else {
+        } else
+        {
             this.setState({ snake: tempSnake });
         }
     }
 
-    gameOver() {
+    gameOver()
+    {
         this.gameOverAudio.play();
 
         clearInterval(this.intervalId);
         this.turningPoints = [];
-
-        let bestScore = localStorage.getItem("bestScore");
-        bestScore = bestScore === null ? 0 : parseInt(bestScore);
-        let gameOverMsg = "GAME OVER!";
-
-        if (this.state.currentScore > bestScore) {
-            localStorage.setItem("bestScore", this.state.currentScore);
+        let gameOverMsg = 'GAME OVER!';
+        let bestScore = this.getBestScore(this.mode);
+        if (this.state.currentScore > bestScore)
+        {
+            localStorage.setItem(this.mode + "BestScore", this.state.currentScore);
             bestScore = this.state.currentScore;
             gameOverMsg = "NEW BEST!";
         }
@@ -325,34 +348,48 @@ class App extends Component {
         });
     }
 
-    getRandomInt(min, max) {
+    getBestScore(mode)
+    {
+        let bestScore = localStorage.getItem(mode + "BestScore");
+        bestScore = bestScore === null ? 0 : parseInt(bestScore);
+        return bestScore;
+    }
+
+    getRandomInt(min, max)
+    {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    onSwipeMove(position, event) {
+    onSwipeMove(position, event)
+    {
+        if (this.state.gameMenuDisplay || this.state.gameOverDisplay) return;
+
         let tolerance = 2;
         let x = position.x;
         let y = position.y;
 
-        if (this.allowSwipe) {
-            if (Math.abs(x) > tolerance || Math.abs(y) > tolerance) {
+        if (this.allowSwipe)
+        {
+            if (Math.abs(x) > tolerance || Math.abs(y) > tolerance)
+            {
                 this.allowSwipe = false;
-                if (Math.abs(y) > Math.abs(x)) {
+                if (Math.abs(y) > Math.abs(x))
                     this.keyListner({ keyCode: y > 0 ? 40 : 38 });
-                } else {
+                else
                     this.keyListner({ keyCode: x > 0 ? 39 : 37 });
-                }
             }
         }
     }
 
-    render() {
+    render()
+    {
         return (
             <div
                 className="app-bg"
-                onTouchStart={() => {
+                onTouchStart={() =>
+                {
                     this.allowSwipe = true;
                 }}
             >
