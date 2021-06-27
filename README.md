@@ -1,6 +1,6 @@
 # Overview 🐍
 
-This is yet another implimentation of the classic snake game in ReactJs.
+This is yet another implimentation of the classic snake game in ReactJS.
 
 * 3 Levels of difficulties
 * Mobile & touch responsive
