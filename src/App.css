@@ -31,9 +31,8 @@ body {
 .border {
     border: #61dafb 1px solid;
     border-radius: 5px;
-    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-        0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-        0 1px 80px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06), 0 1px 80px rgba(0, 0, 0, 0.12);
 }
 .titleContainer {
     width: 80%;
@@ -131,16 +130,13 @@ body {
     border: 0.5px solid #61dafb;
     background-color: #282c34;
     user-select: none;
-    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-        0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-        0 1px 80px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06), 0 1px 80px rgba(0, 0, 0, 0.12);
 }
-
 .snakeButton:hover {
     color: #282c34;
     background-color: #61dafb;
 }
-
 .board-cell {
     display: flex;
     width: 40px;
@@ -202,7 +198,19 @@ body {
 .invert {
     transform: scaleX(-1);
 }
-
+.fork {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    opacity: 0.5;
+    transition: opacity ease-in 0.1s;
+}
+.fork:hover {
+    opacity: 1;
+}
+.fork:active {
+    opacity: 0.3;
+}
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -264,7 +272,6 @@ body {
         font-size: 12pt;
     }
 }
-
 /* Desktop */
 @media (min-width: 969px) {
     .container {
