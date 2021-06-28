@@ -13,6 +13,6 @@ This is yet another implimentation of the classic snake game in ReactJS.
 
 # Demo 🚀
 
-Checkout a live demo [here](https://diozz.github.io/snake-react-js/demo).
+Checkout a live demo [here](https://diozz.github.io/snake-react-js).
 
 ![](https://i.imgur.com/woK1HQJ.gif)
